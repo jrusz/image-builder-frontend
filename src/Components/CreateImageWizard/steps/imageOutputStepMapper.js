@@ -1,17 +1,20 @@
-import { RHEL_8 } from '../../../constants.js';
+import isRhel from '../../../Utilities/isRhel.js';
 
-export default ({ 'target-environment': targetEnv, release } = {}, { skipAws, skipGoogle, skipAzure } = {}) => {
-    if (!skipAws && targetEnv?.aws) {
-        return 'aws-target-env';
-    }
+export default (
+  { 'target-environment': targetEnv, release } = {},
+  { skipAws, skipGoogle, skipAzure } = {}
+) => {
+  if (!skipAws && targetEnv?.aws) {
+    return 'aws-target-env';
+  }
 
-    if (!skipGoogle && targetEnv?.gcp) {
-        return 'google-cloud-target-env';
-    }
+  if (!skipGoogle && targetEnv?.gcp) {
+    return 'google-cloud-target-env';
+  }
 
-    if (!skipAzure && targetEnv?.azure) {
-        return 'ms-azure-target-env';
-    }
+  if (!skipAzure && targetEnv?.azure) {
+    return 'ms-azure-target-env';
+  }
 
-    return release === RHEL_8 ? 'registration' : 'File system configuration';
+  return isRhel(release) ? 'registration' : 'File system configuration';
 };
