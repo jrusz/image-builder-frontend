@@ -5,7 +5,7 @@ set -euxo pipefail
 SONAR_SCANNER_CLI_VERSION=${SONAR_SCANNER_CLI_VERSION:-4.6.2.2472}
 
 export SONAR_SCANNER_OPTS="-Djavax.net.ssl.trustStore=schutzbot/RH-IT-Root-CA.keystore -Djavax.net.ssl.trustStorePassword=$KEYSTORE_PASS"
-sudo dnf install -y unzip
+sudo dnf install -y unzip nodejs
 curl "https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-$SONAR_SCANNER_CLI_VERSION-linux.zip" -o sonar-scanner-cli.zip
 unzip -q sonar-scanner-cli.zip
 
